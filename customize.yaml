@@ -1,0 +1,84 @@
+device_tracker.1921680200:
+  hidden: true
+device_tracker.19216801:
+  hidden: true
+device_tracker.1921680100:
+  hidden: true
+device_tracker.1921680101:
+  hidden: true
+device_tracker.1921680102:
+  hidden: true
+device_tracker.1921680103:
+  hidden: true
+device_tracker.Frank_iphone:
+  friendly_name: Frank
+  entity_picture: /local/frank.jpg
+  hidden: false
+device_tracker.demijne:
+  friendly_name: Frank
+  entity_picture: /local/frank.jpg
+  hidden: true
+device_tracker.Bart_iphone:
+  friendly_name: Bart
+  entity_picture: /local/bart.jpg
+  hidden: false
+device_tracker.1921680107:
+  hidden: true
+device_tracker.Connie_iphone:
+  friendly_name: Connie
+  entity_picture: /local/connie.jpg
+  hidden: false
+device_tracker.1921680108:
+  hidden: true
+device_tracker.1921680110:
+  hidden: true
+device_tracker.1921680116:
+  hidden: true
+device_tracker.1921680118:
+  hidden: true
+device_tracker.1921680120:
+  hidden: true
+device_tracker.1921680125:
+  hidden: true
+device_tracker.1921680127:
+  hidden: true
+device_tracker.1921680128:
+  hidden: true
+device_tracker.1921680129:
+  hidden: true
+device_tracker.1921680210:
+  hidden: true
+device_tracker.1921680112:
+  hidden: true
+device_tracker.1921680113:
+  hidden: true
+device_tracker.Yvette_SamsungGS8:
+  friendly_name: Yvette
+  entity_picture: /local/yvette.jpg
+  hidden: false
+device_tracker.1921680111:
+  hidden: true
+sensor.dezeiler88_eta:
+  hidden: true
+device_tracker.Tessa_SamsungA5:
+  friendly_name: Tessa
+  entity_picture: /local/tessa.jpg
+  hidden: false
+device_tracker.1921680114:
+  hidden: true
+device_tracker.1921680121:
+  hidden: true
+device_tracker.1921680119:
+  hidden: true
+device_tracker.1921680131:
+  hidden: true
+device_tracker.1921680132:
+  hidden: true
+device_tracker.1921680124:
+  hidden: true
+device_tracker.1921680126:
+  hidden: true
+sensor.downstairs_thermostat_target:
+  friendly_name: Ingestelde temperatuur
+sensor.downstairs_thermostat_temperature:
+  friendly_name: Huidige temperatuur

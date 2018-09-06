@@ -1,0 +1,170 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: De Zeiler 88
+  # Location required to calculate the time the sun rises and sets
+  latitude: 52.427973
+  longitude: 4.659346
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 10
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: UTC
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Zone Setup
+zone:
+  - name: Home
+    latitude: 52.427973
+    longitude: 4.659346
+    radius: 50
+    icon: mdi:account-multiple
+  - name: Werk-Halfweg
+    latitude: 52.385196
+    longitude: 4.716595
+    radius: 50
+    icon: mdi:office-building
+  - name: Werk-Amersfoort
+    latitude: 52.195646
+    longitude: 5.388373
+    radius: 50
+    icon: mdi:office-building
+      
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  base_url: home:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - plex_mediaserver
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+#Enable iOS
+ios:
+
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+nest:
+  client_id: 12f3b87a-5b9b-400a-8f6f-25c517a25823
+  client_secret: !secret Nest_Secret
+
+# Example configuration.yaml entry
+weather:
+  - platform: buienradar
+  
+sensor:
+  - platform: yr
+    name: weather
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - symbol
+      - windSpeed
+  - platform: template
+    sensors:
+      battery_iphone:
+        friendly_name: iPhone Battery
+        unit_of_measurement: '%'
+        value_template:  >-        
+          {%- if states.device_tracker.iphone.attributes.battery %}
+              {{ states.device_tracker.iphone.attributes.battery|round }}
+          {% else %}
+              {{ states.sensor.battery_iphone.state }}
+          {%- endif %}
+        device_class: battery
+  - platform: uber
+    server_token: !secret Uber_Token
+  - platform: google_travel_time
+    api_key: !secret Travel_Password
+    name: Home to Work
+    origin: zone.Home
+    destination: zone.Werk-Halfweg
+  - platform: nederlandse_spoorwegen
+    email: frank@confra.nl
+    password: !secret NS_password
+    routes:
+      - name: Haarlem Spaarnwoude-Arnhem Zuid
+        from: Hlms
+        to: Ahz
+
+# Scan the network for devices and add  them to Home Assistant
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.0.0/24
+    home_interval: 10
+    exclude: 
+      - 192.168.0.201
+      - 192.168.0.1
+  - platform: owntracks
+    max_gps_accuracy: 200
+  - platform: icloud
+    username: frank@confra.nl
+    password: !secret icloud_password
+
+# Add camera to Home Assistant
+camera:
+- platform: generic
+  name: "Voordeur"
+  still_image_url: http://192.168.0.210/cgi-bin/snapshot.cgi?channel=1
+  #authentication: digest
+  username: apiuser
+  password: !secret camera_password
+- platform: generic
+  still_image_url:  http://api.buienradar.nl/image/1.0/RadarMapNL?w=250&h=250
+  
+#  MQTT for Presense Broker
+mqtt:
+  broker: m21.cloudmqtt.com
+  client_id: home-assistant
+  port: 15274 
+  username: ha
+  password: !secret MQTT_password
+
+  
+

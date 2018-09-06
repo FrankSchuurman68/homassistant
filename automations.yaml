@@ -1,0 +1,24 @@
+  - alias: 'Lichten zachtjes aan'
+    trigger:
+      platform: sun
+      event: sunset
+      offset: "-00:45:00"
+    condition:
+      condition: state
+      entity_id: group.bewoners
+      state: home
+    action:
+      service: light.turn_on
+      entity_id: group.woonkamer
+      data:
+        brightness_pct: 5
+        transition: 900
+        profile: relax
+  - alias: 'lichten uit als Bart telefoon slaapt'
+    trigger:
+      platform: state
+      entity_id: device_tracker.bart_iphone
+      to: 'not_home'
+    action:
+      service: light.turn_off
+      entity_id: group.slaapkamer_bart
